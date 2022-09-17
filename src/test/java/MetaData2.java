@@ -16,26 +16,16 @@ public class MetaData2 {
     public static void main(String args[]) throws IOException {
         Map<String, List<String>> hm = new HashMap<String, List<String>>();
         List<String> values = new ArrayList<String>();
-        String excelFilePath1 = "E:\\FMTC.xlsx";
+        String excelFilePath1 = "./FMTC_Results.xlsx";
         FileInputStream inputStream = new FileInputStream(excelFilePath1);
         XSSFWorkbook workbook1 = new XSSFWorkbook(inputStream);
         XSSFSheet Links = workbook1.getSheetAt(0);
         for (int i = 1; i <= Links.getLastRowNum(); i++) {
-//        Document doc = Jsoup.connect("https://www.brookstone.com/").get();
-//
-//        String keywords = doc.select("meta[name=keywords]").first().attr("content");
-//        System.out.println("Meta keyword : " + keywords);
-//        String description = doc.select("meta[name=description]").get(0).attr("content");
-//        System.out.println("Meta description : " + description);
         try {
             XSSFRow Row = Links.getRow(i);
-            XSSFCell Merchant = Row.getCell(0);
+            XSSFCell Merchant = Row.getCell(1);
             String Merchant_Link = Merchant.getStringCellValue();
-//            System.setProperty("http.proxyHost", "192.168.5.1");
-//            System.setProperty("http.proxyPort", "1080");
             Document doc = Jsoup.connect(Merchant_Link).userAgent("Chrome/104.0.5112.102").timeout(5000).get();
-
-
             System.out.printf("Title: %s\n", doc.title());
             String title = doc.title();
             String des = doc.select("meta[name=description]").attr("content");
@@ -60,11 +50,12 @@ public class MetaData2 {
                 row.createCell(1+i).setCellValue(entry.getValue().get(i));
             }
         }
-        File filePath = new File("./FMTC_Results.xlsx");
+        File filePath = new File("./FMTC_Results1.xlsx");
         if(!filePath.exists()){
             filePath.createNewFile();
         }
-        FileOutputStream file = new FileOutputStream(new File("./FMTC_Results.xlsx"));
+
+        FileOutputStream file = new FileOutputStream(new File("./FMTC_Results1.xlsx"));
         workbook.write(file);
         file.close();
     }

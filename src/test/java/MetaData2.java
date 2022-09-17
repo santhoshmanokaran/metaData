@@ -5,6 +5,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.testng.annotations.Test;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -13,7 +14,8 @@ import java.util.List;
 import java.util.Map;
 
 public class MetaData2 {
-    public static void main(String args[]) throws IOException {
+@Test
+    public static void descrptionDetailsthrows() throws FileNotFoundException, IOException {
         Map<String, List<String>> hm = new HashMap<String, List<String>>();
         List<String> values = new ArrayList<String>();
         String excelFilePath1 = "./FMTC_Results.xlsx";

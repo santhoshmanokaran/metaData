@@ -1,0 +1,18 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+
+<suite name="MediaMonitors UI Test Report Runner" verbose="1" >
+    <parameter name="browser" value="chrome"/>
+    <test name="Menu Tests" parallel="classes" thread-count = "1">
+        <classes>
+            <!-- Providing the class name that needs to be tested -->
+            <class name="MetaData2">
+                <methods>
+                    <!-- mention the method names that needs to be tested -->
+                    <!--                    &lt;!&ndash; short cut to comment/uncomment a particular method, select method and press ctrl and / together from keyboard&ndash;&gt;-->
+                    <include name="descrptionDetailsthrows"/>
+
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>

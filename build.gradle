@@ -10,6 +10,7 @@ repositories {
 }
 
 dependencies {
+    implementation 'org.testng:testng:7.1.0'
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
     implementation 'org.seleniumhq.selenium:selenium-java:3.141.59'
@@ -22,8 +23,25 @@ dependencies {
     implementation 'org.apache.poi:poi-ooxml:4.0.0'
     implementation 'com.relevantcodes:extentreports:2.41.2'
     implementation 'commons-io:commons-io:2.11.0'
+    implementation 'org.apache.commons:commons-email:1.5'
+    implementation group: "com.googlecode.json-simple", name: "json-simple", version: "1.1.1"
+
 }
 
 test {
     useJUnitPlatform()
+}
+def Demo = project.hasProperty("demo")
+test {
+    useTestNG() {
+        outputDirectory = file("$project.buildDir//testngOutput")
+        // To generate reports by TestNG library
+        useDefaultListeners = true
+
+        if (Demo) {
+
+                suites "src/test/resources/testng-test-demo.xml"
+
+        }
+    }
 }
